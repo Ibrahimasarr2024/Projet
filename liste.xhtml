@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+
+<h:head>
+	<title>Liste des etudiants</title>
+	<link href="style.css" rel="stylesheet" />
+</h:head>
+<h:body>
+	<div>
+		<h1>Liste des étudiants</h1>
+
+		<h:form>
+			<p:dataTable value="#{etudiantBean.pistEtudiant}" var="e"
+				style="width:70% margin: auto;">
+				<p:column>
+					<f:facet name="header">ID</f:facet>
+				#{e.id}
+			</p:column>
+				<p:column>
+					<f:facet name="header">Nom</f:facet>
+				#{e.nom}
+			</p:column>
+				<p:column>
+					<f:facet name="header">Prenom</f:facet>
+				#{e.prenom}
+			</p:column>
+				<p:column>
+					<f:facet name="header">Datenaiss</f:facet>
+				#{e.datenaiss}
+			</p:column>
+				<p:column>
+					<f:facet name="header">Modifier</f:facet>
+					<h:commandLink action="#{etudiantBean.affiche(e)}" value="modifier" />
+				</p:column>
+				<p:column>
+
+					<f:facet name="header">Supprimer</f:facet>
+					<h:commandLink action="#{etudiantBean.deleteEtudiant(e)}"
+						value="supprimer"
+						onclick="return confirm('voulez-vous supprimer l etudiant')" />
+				</p:column>
+
+
+			</p:dataTable>
+		</h:form>
+
+
+		<div class="#{etudiantBean.modif?'cache':'null'}">
+			<h1>Formulaire D'inscription</h1>
+
+			<h:form>
+				<h:panelGrid columns="2" cellpadding="3">
+
+
+					<h:message for="username1" />
+					<br />
+					<p:outputLabel for="username1" styleClass="block">Nom:</p:outputLabel>
+					<p:inputText id="username1" styleClass="block"
+						value="#{etudiantBean.etudiant.nom}" a:placeholder="votre nom:"
+						validatorMessage="Entrer votre nom." rendered="true" />
+
+
+
+					<h:message for="username2" />
+					<br />
+					<p:outputLabel for="username2" styleClass="block">Prenom:</p:outputLabel>
+					<p:inputText id="username2" styleClass="block"
+						value="#{etudiantBean.etudiant.prenom}"
+						a:placeholder="votre prenom:"
+						validatorMessage="Entrer votre prenom." required="true" />
+
+
+					<h:message for="dateMois" />
+					<br />
+					<p:outputLabel for="dateMois" styleClass="block"> Datenaiss:</p:outputLabel>
+
+					<p:calendar id="dateMois" value="#{etudiantBean.date}"
+						required="true" a:placeholder="votre date de naissance:"
+						pattern="yyyy-MM dd" mode="popup" showOn="button"
+						validatorMessage="entrer votre  date de naissance.">
+
+					</p:calendar>
+					<h:commandButton action="#{etudiantBean.ajoutEtudiant()}"
+						value="Enregistrer" />
+
+				</h:panelGrid>
+				<br />
+			</h:form>
+			<!--Avoir accés au webcan  -->
+
+			<p:photoCam widgetVar="pc" />
+			<p:commandButton type="button" value="capture" />
+			<br />
+			<!-- Exemple pour modifier un texte -->
+			<p:editor value="tests" />
+		</div>
+
+
+
+		<div class="#{etudiantBean.modif?'null':'cache'}">
+			<h1>Editer un Etudiant</h1>
+
+			<h:form>
+				<h:panelGrid columns="2" cellpadding="3">
+
+					<h:message for="username1" />
+					<br />
+					<p:outputLabel for="username1" styleClass="block">Nom</p:outputLabel>
+					<p:inputText id="username1" styleClass="block"
+						value="#{etudiantBean.etudiant.nom}" a:placeholder="votre nom"
+						validatorMessage="Entrer votre nom." rendered="true" />
+
+
+
+					<h:message for="username2" />
+					<br />
+					<p:outputLabel for="username2" styleClass="block">Prenom</p:outputLabel>
+					<p:inputText id="username2" styleClass="block"
+						value="#{etudiantBean.etudiant.prenom}"
+						a:placeholder="votre prenom"
+						validatorMessage="Entrer votre prenom." required="true" />
+
+
+					<h:message for="dateMois" />
+					<br />
+					<p:outputLabel for="dateMois" styleClass="block"> Datenaiss</p:outputLabel>
+
+					<p:calendar id="dateMois" value="#{etudiantBean.date}"
+						required="true" a:placeholder="votre  datenaiss"
+						pattern="yyyy-MM dd" mode="popup" showOn="button"
+						validatorMessage="entrer votre  datenaiss.">
+
+					</p:calendar>
+					<h:commandButton action="#{etudiantBean.modifEtudiant()}"
+						value="Modifier" />
+
+				</h:panelGrid>
+				<br />
+			</h:form>
+		</div>
+		<div>
+			<!-- Exemple sur AccordionPanel -->
+			<p:accordionPanel>
+				<p:tab title="First TAb Tiltle">
+					<h:outputText value="Lorem" />
+		Bien le bonjour........
+		</p:tab>
+				<p:tab title="Second TAb Tiltle">
+					<h:outputText value="Ispum" />
+				</p:tab>
+		//any number of tabs
+		</p:accordionPanel>
+		</div>
+		<div id="j_idt75"
+			class="ui-carousel ui-widget ui-widget-content ui-corner-all"
+			style="width: 100%; height: 600px">
+			<p:carousel autoPlayInterval="2000" effect="easeInStrong"
+				circular="true" itemStyle="widht:100%">
+				<p:graphicImage value="/images/AMA1.jpg" />
+				<p:graphicImage value="/images/AMA2.jpg" />
+				<p:graphicImage value="/images/AMA2.jpg" />
+				<p:graphicImage value="/images/AMA2.jpg" />
+			</p:carousel>
+		</div>
+				
+			
+	</div>
+</h:body>
+
+
+</html>
